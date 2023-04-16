@@ -1,6 +1,2 @@
-﻿  GreenTensor.cpp
-C:\Users\well1\source\repos\Hankel-transform\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\Hankel-transform.cpp(159,22): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\well1\source\repos\Hankel-transform\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\Hankel-transform.cpp(159,18): warning C4244: инициализация: преобразование "double" в "const int", возможна потеря данных
-C:\Users\well1\source\repos\Hankel-transform\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\Hankel-transform.cpp(219,22): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\well1\source\repos\Hankel-transform\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\Hankel-transform.cpp(219,18): warning C4244: инициализация: преобразование "double" в "const int", возможна потеря данных
+﻿  LINK : не найден или не выполнена сборка C:\Users\well1\source\repos\GreenTensor\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\x64\Debug\GreenTensor.exe при последней инкрементной компоновке; выполняется полная компоновка
   GreenTensor.vcxproj -> C:\Users\well1\source\repos\GreenTensor\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\x64\Debug\GreenTensor.exe
