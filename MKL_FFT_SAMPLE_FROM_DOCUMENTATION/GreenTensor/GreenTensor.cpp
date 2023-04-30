@@ -4,15 +4,21 @@
 #include <stdlib.h>
 #include <complex>
 
-const std::complex<long double> mu0 = 1.25663706 * 1.0E3;
-const std::complex<long double> eps0 = 8.8541878e-6;
-const std::complex<long double> lambda_w = 500;
-const std::complex<long double> eps_up = (long double)1.4 * eps0; //esp в верхнем полупространстве
-const std::complex<long double> eps1 = ((long double)-0.33564 * eps0, (long double)-2.9236 * eps0);
-const std::complex<long double> eps2 = (long double)1.2 * eps0;
-const std::complex<long double> eps3 = (long double)3.0 * eps0;
-const std::complex<long double> epsp1 = (long double)2.0 * eps0;
-const std::complex<long double> epsp2 = ((long double)-0.33564 * eps0, (long double)-2.9236 * eps0);
+const std::complex<long double> mu0 = 1.25663706 * 1.0E-6;
+const std::complex<long double> eps0 = 8.8541878e-12;
+const std::complex<long double> lambda_w = 500 * 1.0E-9;
+//const std::complex<long double> eps_up = (long double)1.4 * eps0; //esp в верхнем полупространстве
+//const std::complex<long double> eps1 = ((long double)-0.33564 * eps0, (long double)-2.9236 * eps0);
+//const std::complex<long double> eps2 = (long double)1.2 * eps0;
+//const std::complex<long double> eps3 = (long double)3.0 * eps0;
+//const std::complex<long double> epsp1 = (long double)2.0 * eps0;
+//const std::complex<long double> epsp2 = ((long double)-0.33564 * eps0, (long double)-2.9236 * eps0);
+const std::complex<long double> eps_up = (long double)1.4; //esp в верхнем полупространстве
+const std::complex<long double> eps1 = ((long double)-0.33564, (long double)-2.9236);
+const std::complex<long double> eps2 = (long double)1.2;
+const std::complex<long double> eps3 = (long double)3.0;
+const std::complex<long double> epsp1 = (long double)2.0;
+const std::complex<long double> epsp2 = ((long double)-0.33564, (long double)-2.9236);
 std::complex<long double> k0 = (long double)2 * PI / lambda_w; //k в верхнем полупространстве
 std::complex<long double> k1 = k0 * sqrt(eps1 / eps_up);
 std::complex<long double> k2 = k0 * sqrt(eps2 / eps_up);
@@ -76,7 +82,7 @@ struct dot3D
 double GetRandomNumberFloat(long double min, long double max, int precision)
 {
 
-	double value;
+	long double value;
 
 	// получить случайное число как целое число с порядком precision
 	value = rand() % (int)pow(10, precision);
@@ -132,17 +138,35 @@ int main() {
 	//
 
 
-	//std::cout << k1 << "\n";
-	//std::cout << k2 << "\n";
-	//std::cout << k3 << "\n\n\n\n";
+	std::cout << k1 << "\n";
+	std::cout << k2 << "\n";
+    std::cout << k3 << "\n\n\n\n";
 
 	//std::cout << k0 << "\n";
 	//std::cout << eta("2", 11) - eta("3", 11) << "\n";
 
-	std::cout << u(1, 1) << "\n";
-	std::cout << u(0, 12312) << "\n";
+	std::ofstream out;          // поток для записи
+	out.open("hello.txt");
 
-	std::cout << u(0, 1356666666) << "\n";
+	std::cout << u(123213, 213123) << "\n";
+	std::cout << u(0, 0) << "\n\n\n\n!!!\n";
+	std::complex<long double> s = 0;
+	out << "\n\n\n";
+	for (int i = 0; i < 1000; i++)
+	{
+		out << i << '\n';
+	}
+	out << "real\n";
+	for (int i = 0; i < 1000; i++)
+	{
+		out << real(u(i, 0.5)) << '\n';
+	}
+	out << "imag\n";
+	for (int i = 0; i < 1000; i++)
+	{
+		out << imag(u(i, 0.5)) << '\n';
+	}
+	
 
 	//std::cout << u(6, 1);
 

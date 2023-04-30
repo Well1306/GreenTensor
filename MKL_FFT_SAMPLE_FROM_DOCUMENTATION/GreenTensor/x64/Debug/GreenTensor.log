@@ -3,6 +3,4 @@ C:\Users\well1\source\repos\Hankel-transform\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\M
 C:\Users\well1\source\repos\Hankel-transform\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\Hankel-transform.cpp(159,18): warning C4244: инициализация: преобразование "double" в "const int", возможна потеря данных
 C:\Users\well1\source\repos\Hankel-transform\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\Hankel-transform.cpp(219,22): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
 C:\Users\well1\source\repos\Hankel-transform\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\Hankel-transform.cpp(219,18): warning C4244: инициализация: преобразование "double" в "const int", возможна потеря данных
-C:\Users\well1\source\repos\GreenTensor\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\GreenTensor\GreenTensor.cpp(11,63): warning C4834: отмена возвращаемого значения функции с атрибутом "nodiscard"
-C:\Users\well1\source\repos\GreenTensor\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\GreenTensor\GreenTensor.cpp(15,64): warning C4834: отмена возвращаемого значения функции с атрибутом "nodiscard"
   GreenTensor.vcxproj -> C:\Users\well1\source\repos\GreenTensor\MKL_FFT_SAMPLE_FROM_DOCUMENTATION\x64\Debug\GreenTensor.exe
