@@ -4,29 +4,29 @@
 #include <stdlib.h>
 #include <complex>
 
-const double lambda_w = 500;
-const double mu0 = 4 * PI * pow(10, -7);
-const std::complex<double> eps0 = (pow(10, 7) / (4 * PI), 0);
-const std::complex<double> eps_up = 1.4; //esp в верхнем полупространстве
-const std::complex<double> eps1 = (-0.33564, -2.9236);
-const std::complex<double> eps2 = 1.2;
-const std::complex<double> eps3 = 1.5;
-const std::complex<double> epsp1 = 2.0;
-const std::complex<double> epsp2 = (-0.33564, -2.9236);
-std::complex<double> k0 = 2 * PI / lambda_w; //k в верхнем полупространстве
-std::complex<double> k1 = k0 * sqrt(eps1 / eps_up);
-std::complex<double> k2 = k0 * sqrt(eps2 / eps_up);
-std::complex<double> k3 = k0 * sqrt(eps3 / eps_up);
-std::complex<double> kp1 = k0 * sqrt(epsp1 / eps_up);
-std::complex<double> kp2 = k0 * sqrt(epsp2 / eps_up);
+const std::complex<long double> mu0 = 1.25663706 * 1.0E3;
+const std::complex<long double> eps0 = 8.8541878e-6;
+const std::complex<long double> lambda_w = 500;
+const std::complex<long double> eps_up = (long double)1.4 * eps0; //esp в верхнем полупространстве
+const std::complex<long double> eps1 = ((long double)-0.33564 * eps0, (long double)-2.9236 * eps0);
+const std::complex<long double> eps2 = (long double)1.2 * eps0;
+const std::complex<long double> eps3 = (long double)3.0 * eps0;
+const std::complex<long double> epsp1 = (long double)2.0 * eps0;
+const std::complex<long double> epsp2 = ((long double)-0.33564 * eps0, (long double)-2.9236 * eps0);
+std::complex<long double> k0 = (long double)2 * PI / lambda_w; //k в верхнем полупространстве
+std::complex<long double> k1 = k0 * sqrt(eps1 / eps_up);
+std::complex<long double> k2 = k0 * sqrt(eps2 / eps_up);
+std::complex<long double> k3 = k0 * sqrt(eps3 / eps_up);
+std::complex<long double> kp1 = k0 * sqrt(epsp1 / eps_up);
+std::complex<long double> kp2 = k0 * sqrt(epsp2 / eps_up);
 
-double z0 = -2 * lambda_w;
-double z1 = -3.5 * lambda_w;
-double z2 = -5 * lambda_w;
+std::complex<long double> z0 = (long double)2 * lambda_w;
+std::complex<long double> z1 = (long double)-3.5 * lambda_w;
+std::complex<long double> z2 = (long double)-5 * lambda_w;
 
 
 
-std::complex<double> eta(std::string m, double l)
+std::complex<long double> eta(std::string m, long double l)
 {
 	std::complex<double> r;
 	if (m == "0")
@@ -45,36 +45,35 @@ std::complex<double> eta(std::string m, double l)
 }
 
 
-std::complex<double> r2(double l)
+std::complex<long double> r2(long double l)
 {
 	return exp(eta("2", l) * z2) * (eta("2", l) - eta("3", l)) / (eta("2", l) + eta("3", l));
 }
 
-std::complex<double> r1(double l)
+std::complex<long double> r1(long double l)
 {
 	return exp(eta("0", l) * z1) * ((eta("1", l) + eta("2", l)) * r2(l) * exp(eta("2", l) * z2)
-		+ (eta("1", l) - eta("2", l)) * exp(2.0 * eta("2", l) * z1)) / ((eta("1", l) - eta("2", l)) * r2(l) * exp(eta("2", l) * z2) + (eta("1", l) + eta("2", l)) * exp(2.0 * eta("2", l) * z1));
+		+ (eta("1", l) - eta("2", l)) * exp((long double)2.0 * eta("2", l) * z1)) / ((eta("1", l) - eta("2", l)) * r2(l) * exp(eta("2", l) * z2) + (eta("1", l) + eta("2", l)) * exp((long double)2.0 * eta("2", l) * z1));
 }
 
-std::complex<double> u(double l, double z)
+std::complex<long double> u(long double l, long double z)
 {
-	return exp(-eta("0", l) * (abs(z - z0))) / eta("0", l) - exp(-eta("0", l) * (z + z0)) / eta("0", l) + exp(-eta("0", l) * (z + z0)) * (2.0 * (r1(l) * exp(eta("1", l) * z1) + 1.0))
-		/ (eta("0", l) * (r1(l) * exp(eta("1", l) * z1) + 1.0) - eta("1", l) * (r1(l) * exp(eta("1", l) * z1) - 1.0));
-
+	return exp(-eta("0", l) * (abs(z - z0))) / eta("0", l) - exp(-eta("0", l) * (z + z0)) / eta("0", l) + exp(-eta("0", l) * (z + z0)) * ((long double)2.0 * (r1(l) * exp(eta("1", l) * z1) + (long double)1.0))
+		/ (eta("0", l) * (r1(l) * exp(eta("1", l) * z1) + (long double)1.0) - eta("1", l) * (r1(l) * exp(eta("1", l) * z1) - (long double)1.0));
 }
 
 struct dot2D
 {
-	double z, r;
+	long double z, r;
 };
 
 struct dot3D
 {
-	double z, r, phi;
+	long double z, r, phi;
 };
 
 
-double GetRandomNumberFloat(double min, double max, int precision)
+double GetRandomNumberFloat(long double min, long double max, int precision)
 {
 
 	double value;
@@ -92,18 +91,18 @@ int main() {
 
 	// Частица
 
-	double PartSize = 3 * lambda_w;
+	long double PartSize = (long double)3 * real(lambda_w);
 	std::vector<dot2D> RotGraph;
 	RotGraph.resize(30);
 	for (int i = 1; i < 29; i++)
 	{
 		RotGraph[i].z = PartSize / 30 * (i + 1);
-		RotGraph[i].r = GetRandomNumberFloat(0, lambda_w / 4, 2);
+		RotGraph[i].r = GetRandomNumberFloat(1, real(lambda_w) / (long double)4, 2);
 	}
 
 	RotGraph[0].z = 0;
 	RotGraph[0].r = 0;
-	RotGraph[29].z = 3 * lambda_w;
+	RotGraph[29].z = (long double)3 * real(lambda_w);
 	RotGraph[29].r = 0;
 
 	//
@@ -133,13 +132,19 @@ int main() {
 	//
 
 
-	std::cout << k1 << "\n";
-	std::cout << k2 << "\n";
-	std::cout << k3 << "\n";
+	//std::cout << k1 << "\n";
+	//std::cout << k2 << "\n";
+	//std::cout << k3 << "\n\n\n\n";
 
-	std::cout << eta("2", 1) * z2 << "\n";
+	//std::cout << k0 << "\n";
+	//std::cout << eta("2", 11) - eta("3", 11) << "\n";
 
-	std::cout << u(0.01, 0.01);
+	std::cout << u(1, 1) << "\n";
+	std::cout << u(0, 12312) << "\n";
+
+	std::cout << u(0, 1356666666) << "\n";
+
+	//std::cout << u(6, 1);
 
 }
 
