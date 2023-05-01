@@ -1010,7 +1010,7 @@ double for_g2_le_imag(double tau)
 }
 
 
-void calc(std::string mode,double* ro, double re, double im, double* resRe, double* resIm, double* resMod, double hro, double calc_z0, double calc_z, std::string name)
+void calc(std::string mode,double* ro, double re, double im, double* resRe, double* resIm, double* resMod, double hro, double calc_z0, double calc_z, std::string name, int n)
 {
 	z0 = calc_z0;
 	_z = calc_z;
@@ -1034,11 +1034,17 @@ void calc(std::string mode,double* ro, double re, double im, double* resRe, doub
 	}
 	std::vector<double> filter = MakeFilter(hro, roMax, 0);
 	std::ofstream out2;          // поток для записи
-	out2.open("real.txt");
-	out2 << nro << '\n';
-	for (int i = 0; i < nro; i++)
+	if (n == 0)
+		out2.open("real.txt", std::ios::out | std::ios::app);
+	else
+		out2.open("real.txt");
+	if (n == 1)
 	{
-		out2 << ro[i] << '\n';
+		out2 << nro << '\n';
+		for (int i = 0; i < nro; i++)
+		{
+			out2 << ro[i] << '\n';
+		}
 	}
 	std::vector<double> G1_real;
 	if (mode == "U_hs")
@@ -1059,11 +1065,17 @@ void calc(std::string mode,double* ro, double re, double im, double* resRe, doub
 		out2 << G1_real[i] << '\n';
 	}
 	std::ofstream out3;          // поток для записи
-	out3.open("imag.txt");
-	out3 << nro << '\n';
-	for (int i = 0; i < nro; i++)
+	if (n == 0)
+		out3.open("imag.txt", std::ios::out | std::ios::app);
+	else
+		out3.open("imag.txt");
+	if (n == 1)
 	{
-		out3 << ro[i] << '\n';
+		out3 << nro << '\n';
+		for (int i = 0; i < nro; i++)
+		{
+			out3 << ro[i] << '\n';
+		}
 	}
 	std::vector<double> G1_imag = HankelTransform(filter, hro, roMax, for_g2_le_imag);
 	if (mode == "U_hs")
@@ -1084,11 +1096,17 @@ void calc(std::string mode,double* ro, double re, double im, double* resRe, doub
 		out3 << G1_imag[i] << '\n';
 	}
 	std::ofstream out4;          // поток для записи
-	out4.open("mod.txt");
-	out4 << nro << '\n';
-	for (int i = 0; i < nro; i++)
+	if (n == 0)
+		out4.open("mod.txt", std::ios::out | std::ios::app);
+	else
+		out4.open("mod.txt");
+	if (n == 1)
 	{
-		out4 << ro[i] << '\n';
+		out4 << nro << '\n';
+		for (int i = 0; i < nro; i++)
+		{
+			out4 << ro[i] << '\n';
+		}
 	}
 	out4 << name << '\n';
 	for (int i = 0; i < nro; i++)
@@ -1141,13 +1159,14 @@ int main() {
 
 
 
-
-	calc("for_g2_le", ro, re, im, resRe, resIm, resMod, hro, 0.1, 1, "h1 = 0.15, h2 = 1.5, z > z0");
-
-
-	z1 = -1.5;
+	z1 = -0.15;
 	z2 = -1.65;
-	calc("for_g2_le", ro, re, im, resRe, resIm, resMod, hro, 1, 0.1, "h1 = 1.5, h2 = 0.15, z < z0");
+	calc("for_g2_le", ro, re, im, resRe, resIm, resMod, hro, 0.1, 1, "h1 = 0.15, h2 = 1.5, z > z0", 1);
+
+
+	z1 = -0.15;
+	z2 = -1.65;
+	calc("for_g2_le", ro, re, im, resRe, resIm, resMod, hro, 1, 1.5, "h1 = 1.5, h2 = 0.15, z < z0", 0);
 	
 
 
